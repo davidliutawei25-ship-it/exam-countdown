@@ -1,2 +1,193 @@
-# exam-countdown
-exam-countdown
+{\rtf1\ansi\ansicpg1252\cocoartf2818
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!DOCTYPE html>\
+<html lang="zh">\
+<head>\
+<meta charset="UTF-8">\
+<title>\uc0\u32771 \u35797 \u20498 \u35745 \u26102  | Exam Countdown</title>\
+\
+<style>\
+body \{\
+    font-family: Arial, sans-serif;\
+    text-align: center;\
+    background: #ffffff;\
+    color: #111827;\
+    padding: 40px;\
+\}\
+\
+h1 \{\
+    font-size: 32px;\
+\}\
+\
+#stressBox \{\
+    margin: 20px auto;\
+    padding: 16px;\
+    width: 80%;\
+    max-width: 650px;\
+    border-radius: 12px;\
+    font-size: 18px;\
+    font-weight: 800;\
+    background: #fff5f5;\
+    border: 2px solid #ef4444;\
+    color: #b91c1c;\
+\}\
+\
+.exam \{\
+    margin-top: 20px;\
+    padding: 18px;\
+    border: 1px solid #e5e7eb;\
+    border-radius: 12px;\
+    width: 340px;\
+    margin-left: auto;\
+    margin-right: auto;\
+    background: #ffffff;\
+\}\
+\
+.title \{\
+    font-size: 20px;\
+    color: #2563eb;\
+\}\
+\
+.time \{\
+    font-size: 32px;\
+    margin-top: 10px;\
+\}\
+\
+.tag \{\
+    font-size: 12px;\
+    color: #6b7280;\
+    margin-bottom: 6px;\
+\}\
+\
+button \{\
+    margin-top: 25px;\
+    padding: 10px 18px;\
+    border-radius: 8px;\
+    cursor: pointer;\
+\}\
+</style>\
+</head>\
+\
+<body>\
+\
+<h1 id="mainTitle">\uc0\u32771 \u35797 \u20498 \u35745 \u26102 </h1>\
+\
+<div id="stressBox">\uc0\u26102 \u38388 \u27491 \u22312 \u36924 \u36817 \u65292 \u35831 \u20445 \u25345 \u19987 \u27880 \u12290 </div>\
+\
+<!-- \uc0\u55356 \u57137  Chunkao -->\
+<div class="exam">\
+    <div class="tag">\uc0\u26149 \u32771  / Chunkao</div>\
+    <div class="title" id="springTitle">\uc0\u26149 \u32771 \u20498 \u35745 \u26102 </div>\
+    <div class="time" id="spring"></div>\
+</div>\
+\
+<!-- \uc0\u55357 \u56536  Dengjikao -->\
+<div class="exam">\
+    <div class="tag">\uc0\u31561 \u32423 \u32771  / Dengjikao</div>\
+    <div class="title" id="levelTitle">\uc0\u31561 \u32423 \u32771 \u20498 \u35745 \u26102 </div>\
+    <div class="time" id="level"></div>\
+</div>\
+\
+<!-- \uc0\u55356 \u57263  Gaokao -->\
+<div class="exam">\
+    <div class="tag">\uc0\u39640 \u32771  / Gaokao</div>\
+    <div class="title" id="gaokaoTitle">\uc0\u39640 \u32771 \u20498 \u35745 \u26102 </div>\
+    <div class="time" id="gaokao"></div>\
+</div>\
+\
+<button onclick="toggleLang()">English / \uc0\u20013 \u25991 </button>\
+\
+<script>\
+let isChinese = true;\
+\
+const exams = \{\
+    gaokao: new Date("2027-06-07 09:00:00"),\
+    level: new Date("2027-05-05 09:00:00"),\
+    spring: new Date("2027-01-02 09:00:00")\
+\};\
+\
+// \uc0\u55357 \u57000  \u32039 \u36843 \u35821 \u21477 \
+const stressCN = [\
+    "\uc0\u20320 \u39640 \u32771 \u32771 \u19981 \u22909 \u23601 \u23436 \u20102 \u65281 ",\
+    "\uc0\u39640 \u32771 \u20915 \u23450 \u20320 \u19968 \u36744 \u23376 \u65281 ",\
+    "\uc0\u20320 \u33021 \u32771 \u19978 \u19978 \u28023 \u20844 \u21150 \u21527 \u65311 ",\
+    "\uc0\u20320 \u26410 \u26469 \u33021 \u25214 \u21040 \u24037 \u20316 \u21527 \u65311 ",\
+    "\uc0\u21035 \u20154 \u27604 \u20320 \u21162 \u21147 \u22810 \u20102 \u65281 ",\
+    "\uc0\u20320 \u23558 \u26469 \u24590 \u20040 \u21150 \u65311 ",\
+    "\uc0\u20320 \u36825 \u28857 \u21162 \u21147 \u36824 \u19981 \u22815 \u65281 ",\
+    "\uc0\u26102 \u38388 \u27491 \u22312 \u36924 \u36817 \u65292 \u35831 \u20445 \u25345 \u19987 \u27880 \u12290 "\
+];\
+\
+const stressEN = [\
+    "If you fail Gaokao, everything is over!",\
+    "Gaokao decides your entire future!",\
+    "Can you get into a public university in Shanghai?",\
+    "Will you be able to find a job in the future?",\
+    "Others are working much harder than you!",\
+    "What will you do in the future?",\
+    "Your effort is still not enough!",\
+    "Time is closing in. Stay focused."\
+];\
+\
+let index = 0;\
+\
+// \uc0\u9201  \u20498 \u35745 \u26102 \
+function format(diff) \{\
+    if (diff <= 0) return isChinese ? "\uc0\u24050 \u24320 \u22987  / \u24050 \u32467 \u26463 " : "Started / Finished";\
+\
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24));\
+    const h = Math.floor((diff / (1000 * 60 * 60)) % 24);\
+    const m = Math.floor((diff / (1000 * 60)) % 60);\
+    const s = Math.floor((diff / 1000) % 60);\
+\
+    return `$\{d\}$\{isChinese ? "\uc0\u22825 " : "d"\} $\{h\}$\{isChinese ? "\u23567 \u26102 " : "h"\} $\{m\}$\{isChinese ? "\u20998 " : "m"\} $\{s\}$\{isChinese ? "\u31186 " : "s"\}`;\
+\}\
+\
+// \uc0\u55357 \u56580  \u26356 \u26032 \u20498 \u35745 \u26102 \
+function update() \{\
+    const now = new Date();\
+\
+    document.getElementById("gaokao").innerHTML = format(exams.gaokao - now);\
+    document.getElementById("level").innerHTML = format(exams.level - now);\
+    document.getElementById("spring").innerHTML = format(exams.spring - now);\
+\}\
+\
+// \uc0\u55357 \u57000  \u32039 \u36843 \u25552 \u31034 \
+function updateStress() \{\
+    document.getElementById("stressBox").innerText =\
+        isChinese ? stressCN[index] : stressEN[index];\
+\
+    index = (index + 1) % stressCN.length;\
+\}\
+\
+// \uc0\u55356 \u57101  \u20999 \u25442 \u35821 \u35328 \
+function toggleLang() \{\
+    isChinese = !isChinese;\
+\
+    document.getElementById("mainTitle").innerText =\
+        isChinese ? "\uc0\u32771 \u35797 \u20498 \u35745 \u26102 " : "Exam Countdown";\
+\
+    document.getElementById("springTitle").innerText =\
+        isChinese ? "\uc0\u26149 \u32771 \u20498 \u35745 \u26102 " : "Chunkao Countdown";\
+\
+    document.getElementById("levelTitle").innerText =\
+        isChinese ? "\uc0\u31561 \u32423 \u32771 \u20498 \u35745 \u26102 " : "Dengjikao Countdown";\
+\
+    document.getElementById("gaokaoTitle").innerText =\
+        isChinese ? "\uc0\u39640 \u32771 \u20498 \u35745 \u26102 " : "Gaokao Countdown";\
+\}\
+\
+setInterval(update, 1000);\
+setInterval(updateStress, 3000);\
+\
+update();\
+updateStress();\
+</script>\
+\
+</body>\
+</html>}
